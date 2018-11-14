@@ -7,19 +7,29 @@ r = (255,0,0)
 b = (0,0,0)
 w = (255,255,255)
 g = (218,165,32)
+ng = (218,165,32)
 
 x = 1
 y = 1
 
 
 maze = [[r,r,r,r,r,r,r,r],
-        [r,b,b,b,b,b,b,r],
+        [r,b,b,b,b,b,b,g],
         [r,r,r,b,r,b,b,r],
         [r,b,r,b,r,r,r,r],
         [r,b,b,b,b,b,b,r],
         [r,b,r,r,r,r,b,r],
         [r,b,b,r,b,b,b,r],
         [r,r,r,r,r,g,r,r]]
+        
+maze2 =[[r,r,r,r,r,r,r,r],
+        [r,b,r,b,b,b,b,r],
+        [r,b,r,b,r,b,r,r],
+        [r,b,b,b,r,b,g,r],
+        [r,b,r,b,r,r,r,r],
+        [r,b,r,b,b,b,b,r],
+        [r,b,r,b,r,r,b,r],
+        [r,r,r,r,r,r,ng,r]]
 
 
 game_over = False        
@@ -53,10 +63,15 @@ while game_over == False:
   pitch = sense.get_orientation()['pitch']
   roll = sense.get_orientation()['roll']
   x,y = move_marble(pitch, roll, x,y)
-  if maze[x][y] == g:
-    sense.show_message("Victory!!!!")
+  if maze[y][x] == g:
+    sense.show_message("Level 2")
+    maze = maze2
+  if maze[y][x] == g:
+    sense.show_message("Win!!")
     game_over = True
   maze[y][x] = w
   sense.set_pixels(sum(maze,[]))
-  sleep(0.05)
+  sleep(0.01)
   maze[y][x] = b
+  
+  
